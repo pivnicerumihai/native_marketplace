@@ -18,12 +18,12 @@ export default function WelcomeScreen(props) {
       <ButtonComponent
         title={"Login"}
         color={colors.primary}
-        bottomPx={"5%"}
+        bottomPx={"15%"}
       ></ButtonComponent>
       <ButtonComponent
         title={"Register"}
         color={colors.secondary}
-        bottomPx={"15%"}
+        bottomPx={"5%"}
       ></ButtonComponent>
     </View>
   );

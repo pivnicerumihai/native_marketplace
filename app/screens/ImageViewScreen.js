@@ -1,5 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Image, ImageBackground, Button } from "react-native";
+import { View, StyleSheet, Image, Button } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../config/colors";
 
@@ -7,8 +8,18 @@ export default function ImageViewScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.buttonsContainer}>
-        <Button color={colors.primary} title={"X"}></Button>
-        <Button color={colors.secondary} title={"Delete"}></Button>
+        <MaterialCommunityIcons
+          style={{ marginLeft: 25 }}
+          name="close"
+          color={colors.white}
+          size={35}
+        />
+        <MaterialCommunityIcons
+          style={{ marginRight: 25 }}
+          name="trash-can-outline"
+          color={colors.white}
+          size={35}
+        />
       </View>
       <Image
         style={styles.image}
@@ -29,6 +40,6 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
   },
 });

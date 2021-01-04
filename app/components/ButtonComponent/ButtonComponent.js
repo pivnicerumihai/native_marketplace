@@ -1,5 +1,8 @@
 import React from "react";
-import { TouchableHighlight, StyleSheet, Text } from "react-native";
+
+import { TouchableHighlight, StyleSheet, Text, Platform } from "react-native";
+
+import colors from "../../config/colors";
 
 function ButtonComponent({ color, title, bottomPx }) {
   return (
@@ -24,6 +27,10 @@ const styles = StyleSheet.create({
   },
   text: {
     flexDirection: "column",
+    color: colors.white,
+    fontSize: 18,
+    textTransform: "capitalize",
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Arial",
   },
 });
 
