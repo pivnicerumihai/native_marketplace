@@ -1,37 +1,33 @@
 import React from "react";
 import { Image, View, Text, StyleSheet, Platform } from "react-native";
 
-export default function CardComponent({ title, price, imageUri }) {
+export default function CardComponent({ title, subtitle, imageUri }) {
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={imageUri} />
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.subtitle}>{price}</Text>
+      <View>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.subtitle}>{subtitle}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
-    height: "40%",
-    marginTop: "10%",
-    padding: 5,
+    flexDirection: "row",
+    padding: 15,
   },
   image: {
-    alignSelf: "center",
-    flex: 0.8,
-    width: "90%",
-    resizeMode: "cover",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    flex: 0.4,
+    borderRadius: 150,
+    height: 110,
+    resizeMode: "contain",
   },
   title: {
-    marginLeft: "5%",
     fontFamily: Platform.OS === "android" ? "Roboto" : "Arial",
   },
   subtitle: {
-    marginLeft: "5%",
     fontFamily: Platform.OS === "android" ? "Roboto" : "Arial",
     color: "aqua",
   },
