@@ -3,6 +3,7 @@ import {
   Button,
   FlatList,
   Modal,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
@@ -19,6 +20,7 @@ import colors from "../../config/colors";
 function AppPickerComponent({
   icon,
   items,
+  width,
   placeholder,
   onSelectItem,
   selectedItem,
@@ -28,7 +30,7 @@ function AppPickerComponent({
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width: width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -55,19 +57,29 @@ function AppPickerComponent({
       <Modal visible={modalVisible} animationType="slide">
         <ScreenComponent>
           <Button title="Close" onPress={() => setModalVisible(false)}></Button>
-          <FlatList
-            data={items}
-            keyExtractor={(item) => item.value.toString()}
-            renderItem={({ item }) => (
-              <PickerItemComponent
-                label={item.label}
-                onPress={() => {
-                  setModalVisible(false);
-                  onSelectItem(item);
-                }}
-              />
-            )}
-          ></FlatList>
+          <ScrollView
+            contentContainerStyle={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            {items.map((item) => {
+              return (
+                <PickerItemComponent
+                  style={styles.pickerItem}
+                  key={item.id}
+                  label={item.label}
+                  icon={item.icon}
+                  backgroundColor={item.backgroundColor}
+                  onPress={() => {
+                    setModalVisible(false);
+                    onSelectItem(item);
+                  }}
+                />
+              );
+            })}
+          </ScrollView>
         </ScreenComponent>
       </Modal>
     </>
@@ -79,7 +91,6 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
     padding: 15,
     marginVertical: 10,
   },
@@ -95,6 +106,12 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
     color: colors.medium,
+  },
+  pickerItem: {
+    width: "30%",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "35%",
   },
 });
 export default AppPickerComponent;

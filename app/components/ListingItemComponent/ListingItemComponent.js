@@ -4,12 +4,12 @@ import { Image, Text, View, StyleSheet } from "react-native";
 import colors from "../../config/colors";
 import defaultStyles from "../../config/styles";
 
-function ListingItemComponent({ imageUri, title, price }) {
+function ListingItemComponent({ imageUri, title, subtitle }) {
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={imageUri} />
       <Text style={[defaultStyles.text, styles.title]}>{title}</Text>
-      <Text style={[defaultStyles.text, styles.price]}>{price}</Text>
+      <Text style={[defaultStyles.text, styles.subtitle]}>{subtitle}</Text>
     </View>
   );
 }
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginLeft: "5%",
     padding: 2,
   },
-  price: {
+  subtitle: {
     marginLeft: "5%",
     padding: 3,
     fontWeight: "700",

@@ -9,13 +9,13 @@ let listings = [
     id: 0,
     imageUri: require("../assets/jacket.jpg"),
     title: "Red Jacket For Sale",
-    price: "$100",
+    subtitle: "$100",
   },
   {
     id: 1,
     imageUri: require("../assets/couch.jpg"),
     title: "Couch in great condition",
-    price: "$1000",
+    subtitle: "$1000",
   },
 ];
 
@@ -29,7 +29,7 @@ function ListingsScreen(props) {
               key={item.id}
               imageUri={item.imageUri}
               title={item.title}
-              price={item.price}
+              subtitle={item.subtitle}
             />
           );
         })}

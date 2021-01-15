@@ -7,10 +7,10 @@ import {
   Platform,
   TouchableHighlight,
 } from "react-native";
-
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import colors from "../../config/colors";
+import defaultStyles from "../../config/styles";
 
 export default function CardComponent({
   title,
@@ -18,16 +18,32 @@ export default function CardComponent({
   imageUri,
   onPress,
   renderRightActions,
+  showChevrons,
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+      <TouchableHighlight
+        underlayColor={defaultStyles.colors.light}
+        onPress={onPress}
+      >
         <View style={styles.container}>
           <Image style={styles.image} source={imageUri} />
           <View>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subtitle}>{subtitle}</Text>
+            <Text numberOfLines={1} style={styles.title}>
+              {title}
+            </Text>
+            <Text numberOfLines={2} style={styles.subtitle}>
+              {subtitle}
+            </Text>
           </View>
+          {showChevrons ? (
+            <MaterialCommunityIcons
+              style={styles.chevron}
+              name="chevron-right"
+              color={defaultStyles.colors.medium}
+              size={24}
+            />
+          ) : null}
         </View>
       </TouchableHighlight>
     </Swipeable>
@@ -36,20 +52,28 @@ export default function CardComponent({
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: "row",
     padding: 15,
+    alignItems: "center",
   },
   image: {
-    flex: 0.4,
+    flex: 0.3,
     borderRadius: 150,
     height: 110,
     resizeMode: "contain",
   },
   title: {
+    paddingHorizontal: 10,
     fontFamily: Platform.OS === "android" ? "Roboto" : "Arial",
   },
   subtitle: {
     fontFamily: Platform.OS === "android" ? "Roboto" : "Arial",
     color: "aqua",
+    paddingHorizontal: 10,
+  },
+  chevron: {
+    marginLeft: "auto",
+    alignSelf: "center",
   },
 });
