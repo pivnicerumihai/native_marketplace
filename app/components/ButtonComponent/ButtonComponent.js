@@ -2,12 +2,13 @@ import React from "react";
 
 import { TouchableHighlight, StyleSheet, Text, Platform } from "react-native";
 
-import colors from "../../config/colors";
+import defaultStyles from "../../config/styles";
 
-function ButtonComponent({ color, title, bottomPx }) {
+function ButtonComponent({ color, title, bottomPx, onPress }) {
   return (
     <TouchableHighlight
       style={[styles.button, { backgroundColor: color, bottom: bottomPx }]}
+      onPress={onPress}
     >
       <Text style={styles.text}>{title}</Text>
     </TouchableHighlight>
@@ -16,21 +17,18 @@ function ButtonComponent({ color, title, bottomPx }) {
 
 const styles = StyleSheet.create({
   button: {
-    position: "absolute",
     alignItems: "center",
     borderRadius: 30,
-    width: "90%",
-    marginHorizontal: "5%",
+    width: "100%",
     justifyContent: "center",
     height: 50,
     elevation: 15,
   },
   text: {
     flexDirection: "column",
-    color: colors.white,
+    color: defaultStyles.colors.white,
     fontSize: 18,
-    textTransform: "capitalize",
-    fontFamily: Platform.OS === "android" ? "Roboto" : "Arial",
+    fontFamily: defaultStyles.text.fontFamily,
   },
 });
 
