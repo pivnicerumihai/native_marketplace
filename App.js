@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
-import * as ImagePicker from "expo-image-picker"
+
 
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ImageViewScreen from "./app/screens/ImageViewScreen";
@@ -19,22 +19,9 @@ import ImageInputListComponent from "./app/components/ImageInputListComponent/Im
 
 export default function App() {
 
-const [imageUriList,setImageUriList] = useState([]);
-
-const onChangeImage = async() => {
-  try {
-   
-    const results = await ImagePicker.launchImageLibraryAsync();
-    if(!results.cancelled){
-      setImageUriList([...imageUriList,results.uri]);
-    }
-  } catch (error) {
-    console.log("Error loading image!")
-  }
-} 
-
-  return (
-<ScreenComponent>
-  <ImageInputListComponent imageArray={imageUriList}/>
- <ImageInputComponent imageArray={imageUriList} onChangeImage={onChangeImage}/> 
- </ScreenComponent>)}
+    return (
+        <ScreenComponent>
+            <ListingEditScreen/>
+        </ScreenComponent>
+    )
+}

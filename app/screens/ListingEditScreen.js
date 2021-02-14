@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { ScrollView, Text } from "react-native";
 import * as Yup from "yup";
+import * as Location from 'expo-location';
+
 import {
   AppFormComponent,
   AppFormFieldComponent,
   AppFormPickerComponent,
   SubmitButtonComponent,
+  AppFormImagePickerComponent,
 } from "../components/forms";
 import ScreenComponent from "../components/ScreenComponent/ScreenComponent";
 
@@ -13,6 +17,7 @@ const validationSchema = Yup.object().shape({
   price: Yup.number().required().min(1).max(10000).label("Price"),
   category: Yup.object().required().nullable().label("Category"),
   description: Yup.string().optional().label("Description"),
+  images: Yup.array().min(1,"Please select at least one image")
 });
 
 const categories = [
@@ -53,6 +58,21 @@ const categories = [
 ];
 
 function ListingEditScreen(props) {
+
+  const [location, setLocation] = useState('lcation');
+
+  useEffect(()=>{
+    async()=>{
+      let {status} = await Location.requestPermissionsAsync();
+      if (status !== 'granted'){
+        console.log('Permission to access location was denied!')
+        return;
+      }
+      console.log(status);
+      let location = await Location.getCurrentPositionAsync();
+      setLocation(location);
+    }
+  },[])
   return (
     <ScreenComponent>
       <AppFormComponent
@@ -61,10 +81,13 @@ function ListingEditScreen(props) {
           price: "",
           description: "",
           category: null,
+          images: []
         }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
+        <ScrollView>
+        <AppFormImagePickerComponent name="images"/>
         <AppFormFieldComponent
           name="title"
           autoCapitalize="none"
@@ -92,7 +115,9 @@ function ListingEditScreen(props) {
           autoCorrect={false}
           placeholder="Description"
         />
-        <SubmitButtonComponent title="Post" />
+        <Text>{location}</Text>
+        <SubmitButtonComponent title="Post"  />
+        </ScrollView>
       </AppFormComponent>
     </ScreenComponent>
   );
