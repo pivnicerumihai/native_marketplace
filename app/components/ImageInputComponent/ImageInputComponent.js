@@ -3,8 +3,8 @@ import React from 'react'
 import {MaterialCommunityIcons} from "@expo/vector-icons"
 
 import defaultStyles from "../../config/styles";
-import {TouchableHighlight, TouchableWithoutFeedback} from 'react-native-gesture-handler';
-import {Image, StyleSheet, Text, View} from 'react-native'
+import {TouchableHighlight} from 'react-native-gesture-handler';
+import {StyleSheet, View} from 'react-native'
 
 export default function ImageInputComponent({imageArray, onAddImage}) {
     return (

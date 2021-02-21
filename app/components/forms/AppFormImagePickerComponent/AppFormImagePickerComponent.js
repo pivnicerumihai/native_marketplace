@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import * as ImagePicker from "expo-image-picker"
 import {useFormikContext} from 'formik';
@@ -9,7 +9,7 @@ import ImageInputListComponent from "../../ImageInputListComponent/ImageInputLis
 import ErrorMessageComponent from '../ErrorMessageComponent/ErrorMessageComponent';
 
 export default function AppFormImagePickerComponent({name}) {
-    const { errors, setFieldValue, touched, values } = useFormikContext();
+    const {errors, setFieldValue, touched, values} = useFormikContext();
 
     const onAddImage = async() => {
         try {
@@ -20,7 +20,7 @@ export default function AppFormImagePickerComponent({name}) {
                     results.uri
                 ]);
             }
-            
+
         } catch (error) {
             console.log("Error loading image!")
         }
@@ -28,21 +28,20 @@ export default function AppFormImagePickerComponent({name}) {
 
     const onRemoveImage = (selectedImage) => {
 
-       values[name].splice(values[name].indexOf(selectedImage), 1);
+        values[name].splice(values[name].indexOf(selectedImage), 1);
         setFieldValue([...values[name]]);
 
     }
 
-    return ( 
-    <> 
-    <View>
+    return ( <> <View>
         <ImageInputListComponent
             imageArray={values[name]}
             onRemoveImage={onRemoveImage}/>
         <ImageInputComponent imageArray={values[name]} onAddImage={onAddImage}/>
-    </View> 
-    <ErrorMessageComponent error = {errors[name]} visible = {touched[name]} /> 
-    </>
-    )
+    </View> < ErrorMessageComponent error = {
+        errors[name]
+    }
+    visible = {
+        touched[name]
+    } /> </>)
 }
-

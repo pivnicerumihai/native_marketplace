@@ -1,41 +1,18 @@
 import React from "react";
-import { View } from "react-native";
+import {createStackNavigator} from "@react-navigation/stack";
 
-import ScreenComponent from "../components/ScreenComponent/ScreenComponent";
-import AccountInfoComponent from "../components/AccountInfoComponent/AccountInfoComponent";
-import OptionComponent from "../components/OptionComponent/OptionComponent";
+import AccountOptionsScreen from './AccountOptionsScreen';
+import MyMessages from './MessagesScreen';
 
-import colors from "../config/colors";
+const Stack = createStackNavigator();
 
-function MyAccountScreen(props) {
-  return (
-    <ScreenComponent>
-      <View>
-        <AccountInfoComponent
-          imageUri={require("../assets/mosh.jpg")}
-          username={"Mihai Pivniceru"}
-          emailAddress={"mcpivniceru@gmail.com"}
-        ></AccountInfoComponent>
-        <View style={{ marginTop: 20 }}>
-          <OptionComponent
-            iconUri={"format-list-bulleted"}
-            optionName={"My Listings"}
-            backgroundColor={colors.primary}
-          ></OptionComponent>
-          <OptionComponent
-            iconUri={"email"}
-            optionName={"My Messages"}
-            backgroundColor={colors.secondary}
-          ></OptionComponent>
-          <OptionComponent
-            iconUri={"logout"}
-            optionName={"Log Out"}
-            backgroundColor={colors.warning}
-          ></OptionComponent>
-        </View>
-      </View>
-    </ScreenComponent>
-  );
+export default function MyAccountScreen() {
+
+    return (
+        <Stack.Navigator initialRouteName="Account Options">
+            <Stack.Screen name="Account Options" component={AccountOptionsScreen}/>
+            <Stack.Screen name="My Messages" component={MyMessages}/>
+
+        </Stack.Navigator>
+    );
 }
-
-export default MyAccountScreen;
