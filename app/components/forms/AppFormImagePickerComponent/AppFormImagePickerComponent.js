@@ -33,15 +33,18 @@ export default function AppFormImagePickerComponent({name}) {
 
     }
 
-    return ( <> <View>
+    return ( <> 
+    <View>
         <ImageInputListComponent
             imageArray={values[name]}
             onRemoveImage={onRemoveImage}/>
         <ImageInputComponent imageArray={values[name]} onAddImage={onAddImage}/>
-    </View> < ErrorMessageComponent error = {
+    </View> 
+    < ErrorMessageComponent error = {
         errors[name]
     }
     visible = {
         touched[name]
-    } /> </>)
+    } /> 
+    </>)
 }

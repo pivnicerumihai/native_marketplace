@@ -7,17 +7,20 @@ import ErrorMessageComponent from "../ErrorMessageComponent/ErrorMessageComponen
 function AppFormPickerComponent({items, name, width, placeholder}) {
     const {errors, setFieldValue, touched, values} = useFormikContext();
 
-    return (<> <AppPickerComponent
+    return (<> 
+    <AppPickerComponent
         width={width}
         items={items}
         onSelectItem={(item) => setFieldValue(name, item)}
         placeholder={placeholder}
-        selectedItem={values[name]}/> < ErrorMessageComponent error = {
+        selectedItem={values[name]}/> 
+        <ErrorMessageComponent error = {
         errors[name]
     }
     visible = {
         touched[name]
-    } /> </>);
+    } />
+     </>);
 }
 
 export default AppFormPickerComponent;

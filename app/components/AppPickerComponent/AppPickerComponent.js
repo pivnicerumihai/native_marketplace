@@ -42,9 +42,11 @@ function AppPickerComponent({
             <Text style={[defaultStyles.text, styles.text]}>
               {selectedItem.label}
             </Text>
-          ) : (
+          ) : 
+          (
             <Text style={[defaultStyles.text, styles.text]}>{placeholder}</Text>
-          )}
+          )
+          }
 
           <MaterialCommunityIcons
             name="chevron-down"

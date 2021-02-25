@@ -7,7 +7,7 @@ import defaultStyles from "../../config/styles";
 function ListingItemComponent({ imageUri, title, subtitle }) {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={imageUri} />
+      <Image style={styles.image} source={{uri: imageUri}} />
       <Text style={[defaultStyles.text, styles.title]}>{title}</Text>
       <Text style={[defaultStyles.text, styles.subtitle]}>{subtitle}</Text>
     </View>

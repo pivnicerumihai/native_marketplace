@@ -27,7 +27,7 @@ export default function CardComponent({
         onPress={onPress}
       >
         <View style={styles.container}>
-          <Image style={styles.image} source={imageUri} />
+          <Image style={styles.image} source={{uri: imageUri}} />
           <View>
             <Text numberOfLines={1} style={styles.title}>
               {title}

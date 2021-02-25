@@ -1,35 +1,44 @@
-import React from "react";
-import {View} from "react-native";
+import React, {useState, useEffect} from "react";
+import { Text, View} from "react-native";
+import {ScrollView} from "react-native-gesture-handler";
+import listingsApi from '../api/listings';
 
+import ButtonComponent from "../components/ButtonComponent/ButtonComponent";
 import ListingItemComponent from "../components/ListingItemComponent/ListingItemComponent";
 import ScreenComponent from "../components/ScreenComponent/ScreenComponent";
+import ActivityIndicatorComponent from '../components/ActivityIndicatorComponent/ActivityIndicatorComponent'
 
-let listings = [
-    {
-        id: 0,
-        imageUri: require("../assets/jacket.jpg"),
-        title: "Red Jacket For Sale",
-        subtitle: "$100"
-    }, {
-        id: 1,
-        imageUri: require("../assets/couch.jpg"),
-        title: "Couch in great condition",
-        subtitle: "$1000"
-    }
-];
+import useApi from '../hooks/useApi';
 
-function ListingsScreen(props) {
+import defaultStyles from '../config/styles'
+
+function ListingsScreen() {
+    const {data: listings, error, loading, request:loadListings}  = useApi(listingsApi.getListings);
+
+    useEffect(() => {
+        loadListings();
+    }, [])
+
+  
+
     return (
         <ScreenComponent>
-            <View>
-                {listings.map((item) => {
-                    return (<ListingItemComponent
-                        key={item.id}
-                        imageUri={item.imageUri}
-                        title={item.title}
-                        subtitle={item.subtitle}/>);
-                })}
-            </View>
+            {error && <>
+            <Text> Couldn't retrieve the listings.</Text>
+            <ButtonComponent title="Retry" color={defaultStyles.colors.primary} onPress={loadListings}></ButtonComponent>
+            </>}
+            <ActivityIndicatorComponent visible={loading}/>
+            <ScrollView>
+                <View>
+                    {listings.map((item) => {
+                        return (<ListingItemComponent
+                            key={item.id}
+                            imageUri={item.images[0].url}
+                            title={item.title}
+                            subtitle={item.subtitle}/>);
+                    })}
+                </View>
+            </ScrollView>
         </ScreenComponent>
     );
 }
